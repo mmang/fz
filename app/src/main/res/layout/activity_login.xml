@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="25dp">
+
+
+    <com.mangmang.fz.ui.view.ClearEditText
+        android:id="@+id/etUserName"
+        android:layout_width="0dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="200dp"
+        android:hint="用户名或邮箱"
+        android:text="610880568@qq.com"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.mangmang.fz.ui.view.ClearEditText
+        android:id="@+id/etPassword"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="24dp"
+        android:hint="密码"
+        android:inputType="textPassword"
+        android:text="nihaoa"
+        app:layout_constraintEnd_toEndOf="@+id/etUserName"
+        app:layout_constraintStart_toStartOf="@+id/etUserName"
+        app:layout_constraintTop_toBottomOf="@+id/etUserName" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/x10"
+        android:layout_marginTop="@dimen/x30"
+        android:text="登录"
+        app:layout_constraintLeft_toLeftOf="@id/etPassword"
+        app:layout_constraintRight_toLeftOf="@id/btnReg"
+        app:layout_constraintTop_toBottomOf="@id/etPassword" />
+
+    <Button
+        android:id="@+id/btnReg"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x10"
+        android:text="注册"
+        app:layout_constraintLeft_toRightOf="@+id/btnLogin"
+        app:layout_constraintRight_toRightOf="@id/etPassword"
+        app:layout_constraintTop_toTopOf="@id/btnLogin" />
+
+
+</android.support.constraint.ConstraintLayout>

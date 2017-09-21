@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.mangmang.fz.ui.view.LoadingView
+        android:layout_width="@dimen/x200"
+        android:layout_height="@dimen/y200"
+        android:gravity="center">
+
+    </com.mangmang.fz.ui.view.LoadingView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/x20"
+        android:visibility="gone"
+        tools:text="加载中..." />
+
+</LinearLayout>
