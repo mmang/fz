@@ -24,7 +24,6 @@ class SystemBarUtils {
 
         //全屏 透明的状态栏
         fun fullScreenTransparentStatusBar(window: Window) {
-
             val decorView = window.decorView
             val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
                     View.SYSTEM_UI_FLAG_LAYOUT_STABLE

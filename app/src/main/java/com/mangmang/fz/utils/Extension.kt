@@ -9,6 +9,7 @@ import android.view.Gravity
 import android.widget.Toast
 import com.trello.rxlifecycle2.LifecycleProvider
 import com.trello.rxlifecycle2.android.ActivityEvent
+import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.ObservableTransformer

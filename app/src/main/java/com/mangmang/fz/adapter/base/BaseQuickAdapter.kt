@@ -219,6 +219,7 @@ abstract class BaseQuickAdapter<T, K : BaseViewHolder> : RecyclerView.Adapter<K>
         }
 
         bindViewClickListener(baseViewHolder)
+        baseViewHolder.setAdapter(this@BaseQuickAdapter)
         return baseViewHolder
     }
 
@@ -257,8 +258,10 @@ abstract class BaseQuickAdapter<T, K : BaseViewHolder> : RecyclerView.Adapter<K>
             return
         }
         val view = baseViewHolder.itemView ?: return
-        view.setOnClickListener { v -> mOnItemClickListener?.onItemClick(this@BaseQuickAdapter, v, baseViewHolder.layoutPosition) }
-        mOnItemChildLongClickListener?.let {
+        view.setOnClickListener {
+            mOnItemClickListener?.onItemClick(this@BaseQuickAdapter, it, baseViewHolder.layoutPosition)
+        }
+        mOnItemLongClickListener?.let {
             view.setOnLongClickListener { v -> mOnItemLongClickListener!!.onItemLongClick(this@BaseQuickAdapter, v, baseViewHolder.layoutPosition) }
         }
     }

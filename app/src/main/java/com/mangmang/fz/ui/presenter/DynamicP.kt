@@ -11,6 +11,7 @@ import javax.inject.Inject
  * Created by mangmang on 2017/9/14.
  */
 class DynamicP : BasePresenter<DynamicContract.V>, DynamicContract.P {
+
     override fun loadDynamicData(pageIndex: Int) {
         val queryMap = HashMap<String, String>()
         val params = HashMap<String, String>()

@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import android.view.View
 import com.mangmang.fz.BaseActivity
 import com.mangmang.fz.R
+import com.mangmang.fz.SystemBarUtils
 import com.mangmang.fz.ui.fragment.*
 import com.mangmang.fz.ui.presenter.MianP
 import kotlinx.android.synthetic.main.activity_main.*
@@ -36,6 +37,10 @@ class MainActivity : BaseActivity<MianP>(), View.OnClickListener {
 
 
     override fun initDatas() {
+        SystemBarUtils.fullScreen(window)
+        val params = window.attributes
+        params.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        window.attributes = params
     }
 
     private fun setRadioButton() {

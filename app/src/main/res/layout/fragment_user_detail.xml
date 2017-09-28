@@ -6,44 +6,110 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll">
 
-            <TextView
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/titleBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="xxxxxxxxxxxx" />
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title="标题" />
+
+            <ImageView
+                android:id="@+id/ivHead"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x20"
+                android:src="@mipmap/ic_launcher"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleBar" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x10"
+                android:textSize="@dimen/x32"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivHead"
+                tools:text="名字" />
+
+            <TextView
+                android:id="@+id/tvFollow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/x20"
+                android:gravity="center"
+                android:text="关注"
+                app:layout_constraintEnd_toStartOf="@+id/tvFans"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+            <TextView
+                android:id="@+id/tvFans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x20"
+                android:gravity="center"
+                android:text="粉丝"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@+id/tvFollow"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvFollow" />
+
         </android.support.constraint.ConstraintLayout>
+
 
     </android.support.design.widget.AppBarLayout>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_marginTop="@dimen/x40"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tablayout"
             android:layout_width="match_parent"
+            style="@style/tablayoutDefault"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            app:tabMode="scrollable"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.v4.view.ViewPager
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/viewPager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tablayout" />
 
-
+        <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/list"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/tablayout" />-->
     </android.support.constraint.ConstraintLayout>
-
 
 </android.support.design.widget.CoordinatorLayout>

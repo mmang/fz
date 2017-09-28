@@ -89,6 +89,11 @@ abstract class BaseFragment : Fragment(), LifecycleProvider<FragmentEvent>, HasS
         super.onViewCreated(view, savedInstanceState)
         lifecycleSubject.onNext(FragmentEvent.CREATE_VIEW)
         initView()
+        initData()
+    }
+
+    open fun initData() {
+
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {

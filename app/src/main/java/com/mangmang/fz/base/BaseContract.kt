@@ -9,7 +9,9 @@ interface BaseContract {
 
     interface BaseP {
         fun attachView(view: Any)
+        fun loadData()
         fun detachView()
+
     }
 
     interface BaseV {

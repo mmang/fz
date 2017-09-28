@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="user_detail_tabs">
+        <item>个人资料</item>
+        <item>相册</item>
+        <item>日志</item>
+        <item>动态</item>
+        <item>记录</item>
+    </string-array>
+</resources>

@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mangmang.fz">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
@@ -17,6 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme">
+
+
         <activity
             android:name=".ui.act.WelcomeAct"
             android:theme="@style/splashTheme">
@@ -30,6 +32,9 @@
         <activity android:name=".ui.act.TestActivity" />
         <activity android:name=".ui.act.LoginAtivity" />
         <activity android:name=".ui.act.UserDetailActivity" />
+        <activity android:name=".ui.act.photo.PhotoListActivity" />
+        <activity android:name=".ui.act.photo.PhotoPreActivity" />
+
     </application>
 
 </manifest>

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">fz</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
+
+
 </resources>

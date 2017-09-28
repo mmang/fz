@@ -34,6 +34,10 @@ abstract class BasePresenter<T : BaseContract.BaseV> : BaseContract.BaseP {
             throw Exception("view 必须继承BaseContract.BaseV")
         }
         this.view = view as T
+        loadData()
+    }
+
+    override fun loadData() {
     }
 
     override fun detachView() {

@@ -32,7 +32,7 @@ import javax.inject.Inject
  *  没有注解p的基类
  *
  */
-abstract class BaseCommonActivity : DaggerAppCompatActivity(), LifecycleProvider<ActivityEvent>,
+abstract class BaseCommonActivity : AppCompatActivity(), LifecycleProvider<ActivityEvent>,
         HasFragmentInjector, HasSupportFragmentInjector {
 
     @Inject lateinit var supportFragmentInjector: DispatchingAndroidInjector<Fragment>
@@ -123,7 +123,7 @@ abstract class BaseCommonActivity : DaggerAppCompatActivity(), LifecycleProvider
         DialogManager.dissLoadDialog()
     }
 
-    protected open fun initFragment(savedInstanceState: Bundle?){
+    protected open fun initFragment(savedInstanceState: Bundle?) {
 
     }
 }

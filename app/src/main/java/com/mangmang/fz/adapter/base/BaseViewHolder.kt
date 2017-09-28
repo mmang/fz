@@ -313,8 +313,9 @@ class BaseViewHolder(convertView: View) : RecyclerView.ViewHolder(convertView) {
         if (!view?.isClickable()) {
             view?.setClickable(true)
         }
-        view?.setOnClickListener(View.OnClickListener { v ->
-            adapter?.getOnItemChildClickListener()?.onItemChildClick(adapter!!, v, getClickPosition())
+        view?.setOnClickListener({
+
+            adapter?.getOnItemChildClickListener()?.onItemChildClick(adapter!!, it, getClickPosition())
         })
         return this
     }
@@ -487,7 +488,7 @@ class BaseViewHolder(convertView: View) : RecyclerView.ViewHolder(convertView) {
      * @param adapter The adapter;
      * @return The BaseViewHolder for chaining.
      */
-    protected fun setAdapter(adapter: BaseQuickAdapter<*, *>): BaseViewHolder {
+    fun setAdapter(adapter: BaseQuickAdapter<*, *>): BaseViewHolder {
         this.adapter = adapter
         return this
     }

@@ -136,7 +136,7 @@ class Router private constructor() {
     }
 
     fun options(optionsCompat: ActivityOptionsCompat): Router {
-        this.options = options
+        this.options = optionsCompat
         return this
     }
 
@@ -159,9 +159,8 @@ class Router private constructor() {
                     Router.callback?.onBefore(from, to);
                 }
 
-                intent?.setClass(from, to);
-
-                intent?.putExtras(getBundleData());
+                intent?.setClass(from, to)
+                intent?.putExtras(getBundleData())
 
                 if (options == null) {
                     if (requestCode < 0) {
@@ -175,7 +174,7 @@ class Router private constructor() {
                     }
                 } else {
                     if (requestCode < 0) {
-                        ActivityCompat.startActivity(from, intent, options?.toBundle());
+                        ActivityCompat.startActivity(from, intent, options?.toBundle())
                     } else {
                         ActivityCompat.startActivityForResult(from, intent, requestCode, options?.toBundle());
                     }

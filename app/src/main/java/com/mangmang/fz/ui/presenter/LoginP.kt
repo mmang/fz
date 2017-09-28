@@ -34,6 +34,7 @@ class LoginP : BasePresenter<LoginContract.V>, LoginContract.P {
                         1 -> {
                             view?.loginScuess()
                             UserManager.storeAccount(userName, password, it.auth_token)
+                            UserManager.user=it
                         }
                     }
                     view?.dismissLoading()
