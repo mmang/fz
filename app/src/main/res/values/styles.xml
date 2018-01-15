@@ -1,18 +1,17 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:screenOrientation">portrait</item>
+
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar" />
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="colorPrimary">@color/textColorPrimary</item>
+        <item name="colorPrimaryDark">@color/textColorPrimary</item>
+        <item name="colorAccent">@color/textColorPrimary</item>
     </style>
 
+    <style name="splashTheme" parent="AppThemeTranslucent"></style>
 
-    <style name="splashTheme" parent="BaseAppTheme">
+    <style name="AppThemeTranslucent" parent="AppTheme">
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
@@ -30,7 +29,7 @@
     <style name="BaseAppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="tablayoutDefault" parent="Widget.Design.TabLayout">
-        <item name="tabSelectedTextColor">@color/colorPrimary</item>
+        <item name="tabSelectedTextColor">@color/textColorPrimary</item>
         <item name="tabIndicatorColor">?attr/colorAccent</item>
         <item name="tabIndicatorHeight">2dp</item>
         <item name="tabPaddingStart">12dp</item>

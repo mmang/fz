@@ -2,9 +2,8 @@ package com.mangmang.fz.ui.presenter
 
 import android.text.TextUtils
 import android.util.Log
-import com.mangmang.fz.base.BasePresenter
+import com.happyfi.lelerong.base.BasePresenter
 import com.mangmang.fz.bean.UserDetailField
-import com.mangmang.fz.bean.UserDetailInnerData
 import com.mangmang.fz.ui.act.UserDetailActivity
 import com.mangmang.fz.ui.contract.UserProfileContract
 import com.mangmang.fz.utils.StringUtlis
@@ -45,7 +44,8 @@ class UserProfileP : BasePresenter<UserProfileContract.V>, UserProfileContract.P
                 val methodName = "get${StringUtlis.toUpperCase4Index(field.name, 0)}"
                 val m = obj::class.java.getMethod(methodName)
                 val f = m.invoke(obj)
-                if (f != null && !TextUtils.equals((f as UserDetailField).value, "仅自己可见")) {
+                if (f != null) {
+//                    && !TextUtils.equals((f as UserDetailField).value, "仅自己可见")
                     this.fileds.add(f as UserDetailField)
                 }
             }

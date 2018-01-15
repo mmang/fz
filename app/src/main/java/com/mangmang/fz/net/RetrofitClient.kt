@@ -23,7 +23,7 @@ class RetrofitClient private constructor(context: Context, baseUrl: String) {
     var cache: Cache? = null
     var okHttpClient: OkHttpClient
     var retrofit: Retrofit
-    var DEFAULT_TIMEOUT: Long = 20
+    var DEFAULT_TIMEOUT: Long = 30
 
 
     init {
@@ -41,6 +41,7 @@ class RetrofitClient private constructor(context: Context, baseUrl: String) {
                 .addInterceptor(HeaderInterceptor())
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                .readTimeout(DEFAULT_TIMEOUT,TimeUnit.SECONDS)
                 .build()
 
 

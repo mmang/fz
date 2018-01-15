@@ -1,18 +1,19 @@
 package com.mangmang.fz
 
 import android.content.Context
+import android.content.res.Resources
 
 /**
  * Created by lvruheng on 2017/7/4.
  */
-object UiUtils{
+object UiUtils {
 
-    fun dip2px(context: Context,dipValue:Float):Float{
-        val scale :Float = context.resources.displayMetrics.density
+    fun dip2px(dipValue: Float): Float {
+        val scale: Float = Resources.getSystem().displayMetrics.density
         return dipValue * scale + 0.5f
     }
-    fun px2dip(context: Context,pxValue : Float) :Int{
-        val scale : Float = context.resources.displayMetrics.density
-        return (pxValue/scale+0.5f).toInt()
+
+    fun px2dip(pxValue: Float): Int {
+        return (pxValue / Resources.getSystem().displayMetrics.density).toInt()
     }
 }

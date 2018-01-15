@@ -1,6 +1,6 @@
 package com.wzg.readbook.ui.contract
 
-import com.mangmang.fz.BaseContract
+import com.happyfi.lelerong.base.BaseContract
 
 /**
  * Created by mangmang on 2017/8/29.

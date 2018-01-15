@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/lineColor"
+    android:padding="5dp">
+
+    <EditText
+        android:id="@+id/etInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/shape_input_text_bg"
+        android:maxLines="5"
+        android:minHeight="40dp"
+        android:padding="10dp"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/btnReply"
+        tools:text="" />
+
+
+    <Button
+        android:id="@+id/btnReply"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:background="@drawable/item_btn_bg_enable"
+        android:gravity="center"
+        android:text="发送"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/etInput"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

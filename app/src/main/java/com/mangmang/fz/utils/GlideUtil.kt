@@ -1,19 +1,17 @@
 package com.mangmang.fz.utils
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import com.bumptech.glide.GenericTransitionOptions
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.mangmang.fz.R
 import com.mangmang.fz.glide.GlideApp
-import com.mangmang.fz.glide.GlideRoundTransform
-import retrofit2.http.Url
+import com.mangmang.fz.glide.GlideRequest
 import java.io.File
 
 /**
@@ -25,18 +23,15 @@ object GlideUtil {
     val CORNER_RADIUS = 20//圆角
     val THUMB_SIZE = 0.5f // 0-1之间 10%原图大小
 
-    val options = RequestOptions()
-            .centerCrop()
+    private val options = RequestOptions()
             .placeholder(R.mipmap.ic_launcher)
-            .error(R.mipmap.ic_launcher_round)
-            .fallback(R.mipmap.welcome_bg)
+            .error(R.mipmap.ic_launcher)
+//            .fallback(R.mipmap.welcome_bg)
             .priority(Priority.HIGH)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
 
+    private lateinit var newOptions: RequestOptions
 
-    fun loadImage(context: Context?, imagetView: ImageView, imageUrl: String?) {
-        loadImage(context, imagetView, imageUrl, true)
-    }
 
     fun loadFile(context: Context, imageView: ImageView, file: File) {
         Glide.with(context)
@@ -47,50 +42,60 @@ object GlideUtil {
     }
 
 
-    fun loadThumbnailImage(context: Context, imageView: ImageView, url: String) {
-        Glide.with(context)
-                .load(url)
-                .apply(options)
-                .into(imageView)
-    }
-
-    private fun loadImage(context: Context?, imageView: ImageView, url: String?, isFade: Boolean) {
-        if (isFade) {
-            Glide.with(context)
-                    .load(url)
-                    .apply(options)
-                    .into(imageView)
-        } else {
-
-            Glide.with(context)
-                    .load(url)
-                    .into(imageView)
-
-        }
-
+    fun loadImage(context: Context?, url: String?, imageView: ImageView, scaleType: ImageView.ScaleType = ImageView.ScaleType.CENTER_CROP) {
         GlideApp.with(context)
                 .load(url)
-                .apply(options)
-                .setImageScaleType(ImageView.ScaleType.CENTER_CROP)
+                .setImageScaleType(scaleType)
                 .into(imageView)
-
 
     }
 
 
-    fun loadImage(context: Context?, imageView: ImageView, url: String, scaleType: ImageView.ScaleType) {
-        Glide.with(context)
+    lateinit var glideRequest: GlideRequest<Drawable>
+
+
+    fun load(context: Context?, url: String?, thumbnailUrl: String = ""): GlideUtil {
+        glideRequest = GlideApp.with(context)
                 .load(url)
-                .apply(options)
-                .apply(RequestOptions().centerCrop())
-                .into(imageView)
+
+        if (thumbnailUrl.isNotEmpty())
+            glideRequest.apply {
+                this.thumbnail(com.bumptech.glide.Glide.with(context).load(thumbnailUrl))
+            }
+        return this
+    }
+
+    fun placeholder(resourceId: Int): GlideUtil {
+        options.placeholder(resourceId)
+        return this
+    }
+
+    fun error(error: Int): GlideUtil {
+        options.error(error)
+        return this
+    }
+
+    fun fallback(resourceId: Int): GlideUtil {
+        options.fallback(resourceId)
+        return this
     }
 
 
-    fun loadRoundImage(context: Context?, imageView: ImageView, url: String, scaleType: ImageView.ScaleType) {
+    fun into(imageView: ImageView, loadPlaceHoder: Boolean = true, scaleType: ImageView.ScaleType = ImageView.ScaleType.CENTER_CROP) {
+
+        glideRequest.apply {
+            setImageScaleType(scaleType)
+            if (loadPlaceHoder) apply(options)
+            into(imageView)
+        }
+    }
+
+
+    fun loadRoundImage(context: Context?, imageView: ImageView, url: String?, scaleType: ImageView.ScaleType) {
         GlideApp
                 .with(context)
                 .load(url)
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .apply(options)
                 .setImageScaleType(scaleType)
                 .transition(GenericTransitionOptions())
@@ -98,7 +103,7 @@ object GlideUtil {
                 .into(imageView)
     }
 
-    fun loadRoundImage(context: Context?, imageView: ImageView, url: String) {
+    fun loadRoundImage(context: Context?, imageView: ImageView, url: String?) {
         loadRoundImage(context, imageView, url, ImageView.ScaleType.CENTER_CROP)
     }
 
@@ -122,6 +127,13 @@ object GlideUtil {
     fun clearMemory(context: Context) {
         Glide.get(context)
                 .clearMemory()
+    }
+
+    fun loadThumbnailImage(context: Context, imageView: ImageView, url: String) {
+        Glide.with(context)
+                .load(url)
+                .apply(options)
+                .into(imageView)
     }
 
 }

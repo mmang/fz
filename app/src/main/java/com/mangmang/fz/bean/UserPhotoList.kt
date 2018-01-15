@@ -6,20 +6,20 @@ import com.google.gson.annotations.SerializedName
  * Created by mangmang on 2017/9/27.
  */
 
-data class UserPhotoList(
-		@SerializedName("photo_status") val photoStatus: Int, //1
-		@SerializedName("data") val data: UserPhotoListData
-)
+//data class UserPhotoList(
+//		@SerializedName("photo_status") val photoStatus: Int, //1
+//		@SerializedName("data") val data: UserPhotoListData
+//)
 
-data class UserPhotoListData(
+data class UserPhoto(
 		@SerializedName("count") val count: String, //2
 		@SerializedName("more") val more: Int, //0
 		@SerializedName("page") val page: String, //1
 		@SerializedName("pageSize") val pageSize: String, //30
-		@SerializedName("list") val list: List<UserPhotoListDataList>
+		@SerializedName("list") val list: List<UserPhotoItem>
 )
 
-data class UserPhotoListDataList(
+data class UserPhotoItem(
 		@SerializedName("picid") val picid: String, //1622830
 		@SerializedName("albumid") val albumid: String, //169048
 		@SerializedName("topicid") val topicid: String, //0

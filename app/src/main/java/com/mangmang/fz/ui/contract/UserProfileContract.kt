@@ -1,6 +1,6 @@
 package com.mangmang.fz.ui.contract
 
-import com.mangmang.fz.BaseContract
+import com.happyfi.lelerong.base.BaseContract
 import com.mangmang.fz.bean.UserDetail
 import com.mangmang.fz.bean.UserDetailField
 

@@ -24,6 +24,7 @@ interface AppComponent {
 
 //    @Component.Builder
 //    abstract class Bulider : AndroidInjector.Builder<FZApplication>() {}
+
     fun inject(fzApplication: FZApplication)
     fun inject(okHttpStreamFetcher: OkHttpStreamFetcher)
 

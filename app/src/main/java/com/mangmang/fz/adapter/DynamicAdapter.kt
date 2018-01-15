@@ -1,25 +1,22 @@
 package com.mangmang.fz.adapter
 
-import android.opengl.Visibility
 import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
-import com.bumptech.glide.Glide
+import android.widget.TextView
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.BaseViewHolder
 import com.mangmang.fz.R
-import com.mangmang.fz.adapter.base.BaseQuickAdapter
-import com.mangmang.fz.adapter.base.BaseViewHolder
 import com.mangmang.fz.bean.DynamicItem
+import com.mangmang.fz.utils.Constants
 import com.mangmang.fz.utils.GlideUtil
+import org.w3c.dom.Text
 
 /**
  * Created by mangmang on 2017/9/21.
  */
 class DynamicAdapter(layoutRes: Int, data: MutableList<DynamicItem>) : BaseQuickAdapter<DynamicItem, BaseViewHolder>(layoutRes, data) {
 
-    val blogid = "blogid" //评论日志
-    val albumid = "albumid" //更新相册
-    val doid = "doid"// 发表记录
-    val picid = "picid" //评论图片
 
     init {
     }
@@ -27,7 +24,12 @@ class DynamicAdapter(layoutRes: Int, data: MutableList<DynamicItem>) : BaseQuick
     override fun convert(helper: BaseViewHolder, item: DynamicItem) {
         helper.setText(R.id.userName, item.username)
         helper.setText(R.id.time, item.dateline)
-        helper.setText(R.id.title, item.title)
+
+        val tvTitle = helper.getView<TextView>(R.id.title)
+        tvTitle.text = if (TextUtils.isEmpty(item.title)) item.subject else item.title
+        //判断title是否有内容
+        tvTitle.visibility = if (TextUtils.isEmpty(tvTitle.text)) View.GONE else View.VISIBLE
+
         helper.setText(R.id.textContent, item.message)
 
         var avatar = helper.getView<ImageView>(R.id.avatar)
@@ -39,24 +41,33 @@ class DynamicAdapter(layoutRes: Int, data: MutableList<DynamicItem>) : BaseQuick
         image2.visibility = View.GONE
 
         val textContent = helper.getView<View>(R.id.textContent)
-        textContent.visibility = View.VISIBLE
+        textContent.visibility = if (TextUtils.isEmpty(item.message)) View.GONE else View.VISIBLE
 
-        when (item.idtype) {
+        if (item.idtype != null)
+            when (item.idtype) {
+                Constants.BLOG_TYPE_ID -> {
+                }
+                Constants.ALBUM_TYPE_ID -> {
+                    GlideUtil.load(mContext, item.image_1)
+                            .into(image1)
+                    image1.visibility = View.VISIBLE
 
-            blogid -> ""
-            albumid -> {
-                GlideUtil.loadImage(mContext, image1, item.image_1)
-                image1.visibility = View.VISIBLE
-
-                GlideUtil.loadImage(mContext, image2, item.image_2)
-                image2.visibility = if (TextUtils.isEmpty(item.image_2)) View.INVISIBLE else View.VISIBLE
+                    GlideUtil.load(mContext, item.image_2)
+                            .into(image2)
+                    image2.visibility = if (TextUtils.isEmpty(item.image_2)) View.INVISIBLE else View.VISIBLE
+                }
+                Constants.DO_TYPE_ID -> ""
+                Constants.PIC_TYPE_ID -> {
+                    textContent.visibility = View.GONE
+                    GlideUtil.load(mContext, item.image_1)
+                            .into(image1)
+                    image1.visibility = View.VISIBLE
+                    image2.visibility = View.INVISIBLE
+                }
             }
-            doid -> ""
-            picid -> textContent.visibility = View.GONE
-        }
-        helper.addOnClickListener(R.id.avatar)
-        helper.addOnClickListener(R.id.textContent)
-        helper.addOnClickListener(R.id.title)
 
+        item.avatar?.let {
+            helper.addOnClickListener(R.id.avatar)
+        }
     }
 }

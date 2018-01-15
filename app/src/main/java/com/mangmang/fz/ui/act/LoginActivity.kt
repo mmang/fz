@@ -1,21 +1,22 @@
 package com.mangmang.fz.ui.act
 
-import android.os.Bundle
 import android.text.TextUtils
-import com.mangmang.fz.BaseActivity
+import com.happyfi.lelerong.base.BaseHasPActivity
 import com.mangmang.fz.DialogManager
 import com.mangmang.fz.R
 import com.mangmang.fz.ui.contract.LoginContract
 import com.mangmang.fz.ui.presenter.LoginP
 import com.mangmang.fz.ui.route.Router
-import com.mangmang.fz.ui.route.RouterManager
 import com.mangmang.fz.utils.showToast
 import kotlinx.android.synthetic.main.activity_login.*
 
 /**
  * Created by mangmang on 2017/9/18.
  */
-class LoginAtivity : BaseActivity<LoginP>(), LoginContract.V {
+class LoginAtivity : BaseHasPActivity<LoginP>(), LoginContract.V {
+    override fun initView() {
+
+    }
 
     override fun loginScuess() {
         showToast("登录成功")
@@ -24,7 +25,7 @@ class LoginAtivity : BaseActivity<LoginP>(), LoginContract.V {
                 .launch()
     }
 
-    override fun showError(msg: String) {
+    override fun showError(msg: String?) {
         showToast(msg)
     }
 

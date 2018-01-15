@@ -1,16 +1,17 @@
-package com.mangmang.fz.base
+package com.happyfi.lelerong.base
 
-import android.content.Context
-import com.mangmang.fz.BaseContract
+import android.app.Activity
+import android.app.Fragment
+import com.mangmang.fz.net.ApiService
 import com.trello.rxlifecycle2.LifecycleProvider
 import com.trello.rxlifecycle2.android.ActivityEvent
+import com.trello.rxlifecycle2.android.FragmentEvent
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
 import io.reactivex.ObservableTransformer
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import com.mangmang.fz.net.ApiService
 import javax.inject.Inject
 
 
@@ -27,7 +28,10 @@ abstract class BasePresenter<T : BaseContract.BaseV> : BaseContract.BaseP {
     var view: T? = null
 
     /**
-     * 没有找到办法来用限定
+     * 没有找到办法来解决这个强转
+     *
+     * 如果在baseP上面用泛型就无法再基类里统一 attach
+     * 需要在每个 baseV 的子类去手动设置
      */
     override fun attachView(view: Any) {
         if (view !is BaseContract.BaseV) {
@@ -37,6 +41,7 @@ abstract class BasePresenter<T : BaseContract.BaseV> : BaseContract.BaseP {
         loadData()
     }
 
+
     override fun loadData() {
     }
 
@@ -44,7 +49,11 @@ abstract class BasePresenter<T : BaseContract.BaseV> : BaseContract.BaseP {
         this.view = null
     }
 
+    inline fun <reified T> isA(value: Any) = value is T
 
+    /**
+     * 获取rxlifecyle
+     */
     protected fun getActivityLifecycleProvider(): LifecycleProvider<Any>? {
         var provider: LifecycleProvider<Any>? = null
         if (null != this.view && this.view is LifecycleProvider<*>) {
@@ -53,26 +62,33 @@ abstract class BasePresenter<T : BaseContract.BaseV> : BaseContract.BaseP {
         return provider
     }
 
-    fun subscribe(observable: Observable<Any>, observer: Observer<Any>): Observable<Any> {
-        observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(getActivityLifecycleProvider()?.bindUntilEvent(ActivityEvent.DESTROY))
-                .subscribe(observer)
+    fun <I> subscribe(observable: Observable<I>, observer: Observer<I>): Observable<I> {
+        //判断view是activity or  fragment
+        val activityLifecycleProvider = getActivityLifecycleProvider()
+
+        observable.apply {
+            this.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+            if (activityLifecycleProvider is Activity) {
+                this.compose(getActivityLifecycleProvider()?.bindUntilEvent(ActivityEvent.DESTROY))
+            } else if (activityLifecycleProvider is Fragment) {
+                this.compose(activityLifecycleProvider?.bindUntilEvent(FragmentEvent.DETACH))
+            }
+            subscribe(observer)
+        }
         return observable
     }
-
 
     val schedulersTransformer: ObservableTransformer<*, *> = object : ObservableTransformer<Any, Any> {
         override fun apply(upstream: Observable<Any>?): ObservableSource<Any> {
             return upstream!!.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .compose(getActivityLifecycleProvider()?.bindUntilEvent(ActivityEvent.DESTROY))
+
         }
-
-
     }
 
-    fun <T> applySchedulers(): ObservableTransformer<T, T> {
+    open fun <T> applySchedulers(): ObservableTransformer<T, T> {
         return schedulersTransformer as ObservableTransformer<T, T>
     }
 

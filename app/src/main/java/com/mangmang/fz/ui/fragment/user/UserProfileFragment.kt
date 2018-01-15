@@ -1,12 +1,12 @@
 package com.mangmang.fz.ui.fragment.user
 
 import android.support.v7.widget.LinearLayoutManager
+import com.happyfi.lelerong.base.HasPFragment
 import com.mangmang.fz.R
 import com.mangmang.fz.adapter.UserDetailAdapter
 import com.mangmang.fz.bean.UserDetail
 import com.mangmang.fz.bean.UserDetailField
 import com.mangmang.fz.ui.contract.UserProfileContract
-import com.mangmang.fz.ui.fragment.HasPFragment
 import com.mangmang.fz.ui.presenter.UserProfileP
 import com.mangmang.fz.utils.Constants
 import kotlinx.android.synthetic.main.fragment_user_profile.*

@@ -1,11 +1,7 @@
 package com.mangmang.fz.ui.presenter
 
-import android.content.Context
-import com.mangmang.fz.base.BasePresenter
-import com.mangmang.fz.bean.User
-import com.mangmang.fz.net.ApiService
+import com.happyfi.lelerong.base.BasePresenter
 import com.wzg.readbook.ui.contract.TestContract
-import io.reactivex.functions.Consumer
 import javax.inject.Inject
 
 /**

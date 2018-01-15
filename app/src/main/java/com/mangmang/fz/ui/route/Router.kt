@@ -135,6 +135,7 @@ class Router private constructor() {
         return this
     }
 
+
     fun options(optionsCompat: ActivityOptionsCompat): Router {
         this.options = optionsCompat
         return this

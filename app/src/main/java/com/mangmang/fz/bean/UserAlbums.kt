@@ -3,12 +3,12 @@ import com.google.gson.annotations.SerializedName
 
 
 
-data class UserAlbums(
-		@SerializedName("status") val status: Int, //1
-		@SerializedName("data") val data: UserAlbumData
-)
+//data class UserAlbums(
+//		@SerializedName("status") val status: Int, //1
+//		@SerializedName("data") val data: UserAlbumData
+//)
 
-data class UserAlbumData(
+data class UserAlbum(
 		@SerializedName("count") val count: String, //8
 		@SerializedName("more") val more: Int, //0
 		@SerializedName("page") val page: Int, //

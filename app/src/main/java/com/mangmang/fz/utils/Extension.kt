@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.support.v4.app.Fragment
 import android.view.Gravity
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import com.trello.rxlifecycle2.LifecycleProvider
 import com.trello.rxlifecycle2.android.ActivityEvent
@@ -19,17 +21,22 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by lvruheng on 2017/7/2.
  */
-fun Context.showToast(message: String): Toast {
+inline fun Context.showToast(message: String?): Toast {
+
     var toast: Toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
     toast.setGravity(Gravity.CENTER, 0, 0)
-    toast.show()
+    message?.let {
+        toast.show()
+    }
     return toast
 }
 
-fun Fragment.showToast(message: String): Toast {
+inline fun Fragment.showToast(message: String?): Toast {
     var toast: Toast = Toast.makeText(this.context, message, Toast.LENGTH_SHORT)
     toast.setGravity(Gravity.CENTER, 0, 0)
-    toast.show()
+    message?.let {
+        toast.show()
+    }
     return toast
 }
 
@@ -39,11 +46,26 @@ inline fun <reified T : Activity> Activity.newIntent() {
     startActivity(intent)
 }
 
-fun <T> Observable<T>.applySchedulers(): Observable<T> {
+inline fun <T> Observable<T>.applySchedulers(): Observable<T> {
     return subscribeOn(Schedulers.io()).
             unsubscribeOn(Schedulers.io()).
             observeOn(AndroidSchedulers.mainThread())
 }
+
+
+inline fun Activity.hideSoftInputFromWindow() {
+    val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputManager.hideSoftInputFromWindow(this.currentFocus.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+
+}
+
+inline fun Activity.showSoftInputFromWindow(editText: EditText) {
+    val inputManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputManager.hideSoftInputFromWindow(this.currentFocus.windowToken, InputMethodManager.SHOW_FORCED)
+
+}
+
+
 
 
 

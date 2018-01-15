@@ -11,6 +11,11 @@
         android:layout_weight="1" />
 
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y2"
+        android:background="@color/lineColor" />
+
     <RadioGroup
         android:id="@+id/rg_root"
         android:layout_width="match_parent"
@@ -25,7 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/icon_user_selector"
+            android:checked="true"
+            android:drawableTop="@drawable/icon_home"
             android:gravity="center"
             android:text="动态"
             android:textColor="@color/gray"

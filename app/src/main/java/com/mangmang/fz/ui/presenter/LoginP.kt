@@ -1,19 +1,17 @@
 package com.mangmang.fz.ui.presenter
 
-import android.content.Context
-import com.mangmang.fz.base.BasePresenter
-import com.mangmang.fz.bean.User
+import com.happyfi.lelerong.base.BasePresenter
+import com.mangmang.fz.net.requestCallBack
 import com.mangmang.fz.ui.contract.LoginContract
 import com.mangmang.fz.utils.MD5Util
 import com.mangmang.fz.utils.UserManager
-import com.wzg.readbook.ui.contract.TestContract
+import io.reactivex.Observable
 import javax.inject.Inject
 
 /**
  * Created by mangmang on 2017/9/14.
  */
 class LoginP : BasePresenter<LoginContract.V>, LoginContract.P {
-
 
     override fun login(userName: String, password: String) {
         view?.showLoading()
@@ -26,20 +24,14 @@ class LoginP : BasePresenter<LoginContract.V>, LoginContract.P {
         params.put("username", userName)
         apiService.login(queryMap, params)
                 .compose(applySchedulers())
-                .subscribe({
-                    when (it.account_status) {
-                        0 -> {
-                            view?.showError("登录失败")
-                        }
-                        1 -> {
-                            view?.loginScuess()
-                            UserManager.storeAccount(userName, password, it.auth_token)
-                            UserManager.user=it
-                        }
-                    }
+                .requestCallBack({
+                    view?.loginScuess()
+                    UserManager.storeAccount(userName, password, it.data!!.token)
+                    UserManager.user = it.data
                     view?.dismissLoading()
-                }, {
-                    view?.showError("登录出错")
+                }, { _, _ ->
+                    view?.dismissLoading()
+                    view?.showError("登录失败")
                 })
     }
 
@@ -48,3 +40,5 @@ class LoginP : BasePresenter<LoginContract.V>, LoginContract.P {
 
 
 }
+
+

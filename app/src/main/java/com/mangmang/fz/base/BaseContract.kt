@@ -1,4 +1,4 @@
-package com.mangmang.fz
+package com.happyfi.lelerong.base
 
 import android.content.Context
 
@@ -15,7 +15,7 @@ interface BaseContract {
     }
 
     interface BaseV {
-        fun showError(msg:String)
+        fun showError(msg: String?)
         fun complete()
         fun showLoading()
         fun dismissLoading()

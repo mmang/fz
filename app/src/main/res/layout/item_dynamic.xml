@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.mangmang.fz.widget.ShadowConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:background="@color/white"
+    android:elevation="8dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:padding="10dp">
 
 
     <ImageView
@@ -23,14 +28,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/x20"
+        android:textColor="@color/textBlackPrimary"
+        android:textSize="@dimen/x32"
         app:layout_constraintLeft_toRightOf="@+id/avatar"
         app:layout_constraintTop_toTopOf="@+id/avatar"
-        tools:text="namsdfsdfasdsdfe" />
+        tools:text="name" />
 
     <TextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/textBlackPrimaryLight"
+        android:textSize="@dimen/x28"
         app:layout_constraintBottom_toBottomOf="@+id/avatar"
         app:layout_constraintLeft_toLeftOf="@+id/userName"
         tools:text="time" />
@@ -54,10 +63,10 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/x20"
         android:layout_marginTop="@dimen/x20"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="@+id/avatar"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        tools:text="dfadf;adfjk" />
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <ImageView
         android:id="@+id/image1"
@@ -69,7 +78,7 @@
         android:src="@mipmap/welcome_bg"
         android:visibility="visible"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintLeft_toLeftOf="@+id/textContent"
+        app:layout_constraintLeft_toLeftOf="@+id/avatar"
         app:layout_constraintRight_toLeftOf="@+id/image2"
         app:layout_constraintTop_toBottomOf="@+id/textContent"
         tools:src="@mipmap/welcome_bg" />
@@ -90,14 +99,20 @@
         app:layout_constraintTop_toTopOf="@+id/image1"
         tools:src="@mipmap/welcome_bg" />
 
-
-    <View
-        android:layout_width="0dp"
+    <android.support.v4.widget.Space
+        android:layout_width="match_parent"
         android:layout_height="@dimen/x20"
-        android:layout_marginTop="@dimen/x20"
-        android:background="@color/gray"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/image1" />
 
-</android.support.constraint.ConstraintLayout>
+
+    <!--<View-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="@dimen/x20"-->
+    <!--android:layout_marginTop="@dimen/x20"-->
+    <!--android:background="@color/gray"-->
+    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--app:layout_constraintRight_toRightOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@id/image1" />-->
+
+</com.mangmang.fz.widget.ShadowConstraintLayout>
+

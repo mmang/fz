@@ -4,22 +4,22 @@ package com.mangmang.fz.bean
  * Created by mangmang on 2017/9/18.
  */
 
-data class User(
-		val auth_token: String,// 3b14b53a7555cfd35333495157b078aa
-		val account_status: Int,// 1
-		val data: Data
-)
+//data class User(
+//		val auth_token: String,// 3b14b53a7555cfd35333495157b078aa
+//		val account_status: Int,// 1
+//		val data: Data
+//)
 
-data class Data(
+data class User(
 		val uid: String,// 2328052
 		val username: String,// 茫忙
 		val token: String,// 3b14b53a7555cfd35333495157b078aa
-		val data: DataInner,
+		val data: UserData,
 		val dateline: String// 2017-09-18 16:15:42
 )
 
 
-data class DataInner(
+data class UserData(
 		val uid: String,// 2328052
 		val sex: String,// 1
 		val email: String,// 610880568@qq.com

@@ -2,16 +2,11 @@ package com.mangmang.fz.ui.act.photo
 
 import android.os.Bundle
 import android.text.TextUtils
+import com.happyfi.lelerong.base.BaseCommonActivity
 import com.mangmang.fz.R
-import com.mangmang.fz.base.BaseCommonActivity
-import com.mangmang.fz.net.ApiService
 import com.mangmang.fz.ui.fragment.PhotoFragment
 import com.mangmang.fz.utils.Constants
-import com.mangmang.fz.utils.applySchedulers
 import com.mangmang.fz.utils.showToast
-import com.trello.rxlifecycle2.android.ActivityEvent
-import com.trello.rxlifecycle2.kotlin.bindUntilEvent
-import javax.inject.Inject
 
 /**
  * Created by mangmang on 2017/9/27.
@@ -22,13 +17,15 @@ class PhotoListActivity : BaseCommonActivity() {
 
     var page = 1
 
-    @Inject
-    lateinit var apiService: ApiService
-
     override fun getLayoutId(): Int {
 
         return R.layout.activity_photolist
     }
+
+    override fun initView() {
+
+    }
+
 
     override fun initDatas() {
         val albumId = intent.getStringExtra(Constants.ALBUM_ID)
@@ -39,12 +36,9 @@ class PhotoListActivity : BaseCommonActivity() {
 
         val fragment = PhotoFragment()
         val bundle = Bundle()
-        bundle.putString(Constants.ALBUM_ID,albumId)
+        bundle.putString(Constants.ALBUM_ID, albumId)
         fragment.arguments = bundle
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.container,fragment)
-                .commit()
-
+        supportDelegate.loadRootFragment(R.id.container, fragment)
     }
 
     override fun initlistener() {

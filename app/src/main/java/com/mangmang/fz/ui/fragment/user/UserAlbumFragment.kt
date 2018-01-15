@@ -1,33 +1,26 @@
 package com.mangmang.fz.ui.fragment.user
 
-import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.text.TextUtils
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.happyfi.lelerong.base.BaseFragment
+import com.happyfi.lelerong.base.BaseInjectorFragment
 import com.mangmang.fz.R
-import com.mangmang.fz.adapter.PhotoAdapter
 import com.mangmang.fz.adapter.UserAlbumAdapter
-import com.mangmang.fz.adapter.base.BaseQuickAdapter
 import com.mangmang.fz.net.ApiService
+import com.mangmang.fz.net.requestCallBack
 import com.mangmang.fz.ui.act.photo.PhotoListActivity
-import com.mangmang.fz.ui.fragment.BaseFragment
 import com.mangmang.fz.ui.route.Router
 import com.mangmang.fz.utils.Constants
-import com.mangmang.fz.utils.UserManager
 import com.mangmang.fz.utils.applySchedulers
-import com.mangmang.fz.utils.showToast
-import kotlinx.android.synthetic.main.fragment_photo.*
+import kotlinx.android.synthetic.main.layout_refresh.*
 import javax.inject.Inject
 
 /**
  * Created by mangmang on 2017/9/19.
  */
-class UserAlbumFragment : BaseFragment(), BaseQuickAdapter.OnItemClickListener {
+class UserAlbumFragment : BaseInjectorFragment(), BaseQuickAdapter.OnItemClickListener {
 
     override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
 //        UserPhotosItem
@@ -45,14 +38,15 @@ class UserAlbumFragment : BaseFragment(), BaseQuickAdapter.OnItemClickListener {
 
 
     override fun initView() {
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
         userAlbumAdapter = UserAlbumAdapter(R.layout.item_album, mutableListOf())
         recyclerView.adapter = userAlbumAdapter
         userAlbumAdapter.setOnItemClickListener(this)
+        refreshLayout.isEnableRefresh = false
     }
 
     override fun getLayoutResources(): Int {
-        return R.layout.fragment_photo
+        return R.layout.layout_refresh
     }
 
     override fun initData() {
@@ -64,11 +58,12 @@ class UserAlbumFragment : BaseFragment(), BaseQuickAdapter.OnItemClickListener {
         }
         apiservice.getUserPhotos(false, uid!!)
                 .applySchedulers()
-                .subscribe({
-                    userAlbumAdapter.addData(it.data.list)
-                }, {
-                    showToast(it.message.toString())
-                })
+                .requestCallBack {
+                    it.data?.let {
+                        refreshLayout.isEnableLoadmore = it.more != 0
+                        userAlbumAdapter.addData(it.list)
+                    }
+                }
     }
 
 }
